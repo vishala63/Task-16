@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Loops Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f9f9f9;
+    }
+
+    button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #output {
+      margin-top: 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>JavaScript Practice Tasks</h2>
+
+  <button onclick="displayEvenNumbers()">1. Even numbers up to N</button>
+  <button onclick="checkVowelOrConsonant()">2. Vowel or Consonant</button>
+  <button onclick="countEvenOdd()">3. Count Even/Odd from 1 to 999</button>
+  <button onclick="countCharInString()">4. Count Character Occurrence</button>
+  <button onclick="sumAndAverage()">5. Sum & Average of [1, 9, 8]</button>
+  <button onclick="largestInArray()">6. Largest in User Array (Loop)</button>
+
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+    // Task 1: Display even numbers up to n
+    function displayEvenNumbers() {
+      let n = parseInt(prompt("Enter a number (n):"));
+      if (isNaN(n) || n < 1) {
+        output.innerText = "❌ Please enter a valid positive number.";
+        return;
+      }
+
+      let evens = [];
+      for (let i = 1; i <= n; i++) {
+        if (i % 2 === 0) {
+          evens.push(i);
+        }
+      }
+
+      output.innerText = `✅ Even numbers up to ${n}:\n\n${evens.join(", ")}`;
+    }
+
+    // Task 2: Check vowel or consonant
+    function checkVowelOrConsonant() {
+      const ch = prompt("Enter a single character:").toLowerCase();
+      if (ch.length !== 1 || !/[a-z]/.test(ch)) {
+        output.innerText = "❌ Please enter a single alphabet character.";
+        return;
+      }
+
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      if (vowels.includes(ch)) {
+        output.innerText = `✅ "${ch}" is a Vowel.`;
+      } else {
+        output.innerText = `✅ "${ch}" is a Consonant.`;
+      }
+    }
+
+    // Task 3: Count even and odd from 1 to 999
+    function countEvenOdd() {
+      let even = 0, odd = 0;
+      for (let i = 1; i <= 999; i++) {
+        if (i % 2 === 0) even++;
+        else odd++;
+      }
+      output.innerText = `✅ Count from 1 to 999:\nEven numbers: ${even}\nOdd numbers: ${odd}`;
+    }
+
+    // Task 4: Count occurrence of a character
+    function countCharInString() {
+      const str = prompt("Enter a string (e.g. hello):");
+      const char = prompt("Enter the character to count (e.g. l):");
+      if (!str || !char || char.length !== 1) {
+        output.innerText = "❌ Please enter a valid string and a single character.";
+        return;
+      }
+
+      let count = 0;
+      for (let i = 0; i < str.length; i++) {
+        if (str[i] === char) count++;
+      }
+
+      output.innerText = `✅ '${char}' occurs ${count} time(s) in "${str}".`;
+    }
+
+    // Task 5: Sum and average of array
+    function sumAndAverage() {
+      const arr = [1, 9, 8];
+      let sum = 0;
+      for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+      }
+      const avg = sum / arr.length;
+      output.innerText = `✅ Array: [${arr.join(", ")}]\nSum: ${sum}\nAverage: ${avg.toFixed(2)}`;
+    }
+
+    // Task 6: Largest number in user-entered array using loop
+    function largestInArray() {
+      const input = prompt("Enter array elements separated by commas (e.g., 1, 9, 8):");
+      if (!input) {
+        output.innerText = "❌ Input cannot be empty.";
+        return;
+      }
+
+      // Convert to array of numbers
+      const arr = input.split(",").map(val => parseFloat(val.trim()));
+
+      if (arr.some(isNaN)) {
+        output.innerText = "❌ Please enter valid numbers only.";
+        return;
+      }
+
+      let largest = arr[0];
+      for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > largest) {
+          largest = arr[i];
+        }
+      }
+
+      output.innerText = `✅ Largest number in [${arr.join(", ")}] is ${largest}`;
+    }
+  </script>
+
+</body>
+</html>
